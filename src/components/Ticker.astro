@@ -1,0 +1,66 @@
+---
+const items = [
+  "TRIAL BALANCE: INTACT",
+  "VARIANCES AT LARGE: 0",
+  "BOOKS: CLOSED",
+  "AUDIT SEASON: SURVIVED",
+  "SUSPENSE ACCOUNTS: ELIMINATED",
+  "CHARTERSHIP: LOADING ▓▓▓▓▓▓░░░░ 62%",
+  "DEPRECIATION: RATES SETTLED AMICABLY",
+  "ROUNDING ERRORS: ENDANGERED SPECIES",
+];
+---
+
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    {
+      [0, 1].map(() => (
+        <span class="run mono">
+          {items.map((t) => (
+            <em>{t}</em>
+          ))}
+        </span>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .ticker {
+    border-block: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.015);
+    overflow: hidden;
+  }
+  .track {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll 38s linear infinite;
+  }
+  .run {
+    display: flex;
+    flex: none;
+  }
+  em {
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--dim);
+    padding: 15px 26px 15px 0;
+    white-space: nowrap;
+  }
+  em::before {
+    content: "◆";
+    color: rgba(242, 182, 61, 0.55);
+    margin-right: 26px;
+  }
+  @keyframes ticker-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .track {
+      animation: none;
+    }
+  }
+</style>

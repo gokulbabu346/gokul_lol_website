@@ -1,0 +1,116 @@
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow reveal">✦ Accountant ✦ Ledger Legend ✦ Chartered-in-Training ✦</p>
+    <h1 class="reveal">GOKUL <span>D_BOG</span></h1>
+    <p class="type-line mono reveal">
+      ❯&nbsp;<span id="typewriter">Balancing the unbalanceable since day one.</span><span class="caret"
+        ></span
+      >
+    </p>
+    <p class="lede reveal">
+      Some heroes wield swords. Gokul wields a spreadsheet — and the books have never lied since.
+      Currently carving his way to full chartership, one flawless reconciliation at a time.
+    </p>
+    <div class="cta reveal">
+      <a class="btn btn-primary" href="#exploits">Witness the Exploits</a>
+      <a class="btn btn-ghost" href="#contact">Open an Audit</a>
+    </div>
+    <p class="status mono reveal">
+      STATUS: <span class="ok"><span class="dot"></span> BALANCED</span
+      ><span class="sep">·</span>VARIANCES AT LARGE: 0<span class="sep">·</span>THREAT LEVEL:
+      NEGLIGIBLE
+    </p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 84px;
+  }
+  h1 {
+    font-size: clamp(3.2rem, 10vw, 7.4rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #f2f4f8;
+  }
+  h1 span {
+    background: linear-gradient(100deg, #f7d98c 0%, #f2b63d 45%, #c98d1e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 26px rgba(242, 182, 61, 0.28));
+  }
+  .type-line {
+    color: var(--gold);
+    font-size: 1.05rem;
+    min-height: 1.7em;
+    margin-top: 18px;
+    letter-spacing: 0.02em;
+  }
+  .caret {
+    display: inline-block;
+    width: 9px;
+    height: 1.1em;
+    background: var(--gold);
+    margin-left: 5px;
+    vertical-align: text-bottom;
+    animation: blink 1.05s steps(1) infinite;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  .lede {
+    max-width: 620px;
+    color: var(--muted);
+    font-size: 1.15rem;
+    margin-top: 22px;
+  }
+  .cta {
+    display: flex;
+    gap: 14px;
+    margin-top: 34px;
+    flex-wrap: wrap;
+  }
+  .status {
+    margin-top: 48px;
+    font-size: 12px;
+    color: var(--dim);
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .status .ok {
+    color: var(--green);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .status .sep {
+    opacity: 0.5;
+  }
+  .hero .reveal:nth-child(1) {
+    transition-delay: 0.05s;
+  }
+  .hero .reveal:nth-child(2) {
+    transition-delay: 0.12s;
+  }
+  .hero .reveal:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+  .hero .reveal:nth-child(4) {
+    transition-delay: 0.28s;
+  }
+  .hero .reveal:nth-child(5) {
+    transition-delay: 0.36s;
+  }
+  .hero .reveal:nth-child(6) {
+    transition-delay: 0.44s;
+  }
+</style>

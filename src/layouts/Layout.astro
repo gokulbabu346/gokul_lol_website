@@ -1,0 +1,173 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Gokul D_Bog — The Ledger Legend",
+  description = "Accountant. Ledger legend. Chartered-in-training. The exploits, stats and quests of Gokul D_Bog — the man who balances the unbalanceable.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#06080c" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="backdrop" aria-hidden="true">
+      <div class="backdrop-grid"></div>
+      <div class="backdrop-glow"></div>
+      <div class="backdrop-digits" id="backdrop-digits"></div>
+    </div>
+    <slot />
+    <script>
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Floating ledger digits in the backdrop
+      const digitHost = document.getElementById("backdrop-digits");
+      if (digitHost && !prefersReduced) {
+        const glyphs = ["₹", "%", "7", "2", "0", "9", "₹", "=", "8"];
+        for (let i = 0; i < 26; i++) {
+          const s = document.createElement("span");
+          s.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+          s.style.left = `${Math.random() * 100}%`;
+          s.style.top = `${Math.random() * 100}%`;
+          s.style.animationDelay = `${Math.random() * 14}s`;
+          s.style.animationDuration = `${12 + Math.random() * 14}s`;
+          s.style.fontSize = `${10 + Math.random() * 22}px`;
+          digitHost.appendChild(s);
+        }
+      }
+
+      // Reveal-on-scroll
+      const revealIo = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              revealIo.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => revealIo.observe(el));
+
+      // Count-up stats (server renders final values; JS replays them)
+      const fmt = (v: number, d: number) =>
+        v.toLocaleString("en-IN", { minimumFractionDigits: d, maximumFractionDigits: d });
+      const statEls = document.querySelectorAll<HTMLElement>("[data-target]");
+      if (!prefersReduced && statEls.length) {
+        statEls.forEach((el) => {
+          const d = parseInt(el.dataset.decimals || "0", 10);
+          el.textContent = fmt(0, d) + (el.dataset.suffix || "");
+        });
+        const statIo = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (!e.isIntersecting) continue;
+              const el = e.target as HTMLElement;
+              statIo.unobserve(el);
+              const target = parseFloat(el.dataset.target || "0");
+              const decimals = parseInt(el.dataset.decimals || "0", 10);
+              const suffix = el.dataset.suffix || "";
+              const start = performance.now();
+              const duration = 1600;
+              const frame = (now: number) => {
+                const p = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = fmt(target * eased, decimals) + suffix;
+                if (p < 1) requestAnimationFrame(frame);
+              };
+              requestAnimationFrame(frame);
+            }
+          },
+          { threshold: 0.4 }
+        );
+        statEls.forEach((el) => statIo.observe(el));
+      }
+
+      // Progress + skill bars
+      const barEls = document.querySelectorAll<HTMLElement>(".fill-bar > i");
+      if (!prefersReduced && barEls.length) {
+        const barIo = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (!e.isIntersecting) continue;
+              const bar = e.target as HTMLElement;
+              barIo.unobserve(bar);
+              bar.style.width = bar.dataset.pct || "0%";
+            }
+          },
+          { threshold: 0.4 }
+        );
+        barEls.forEach((el) => barIo.observe(el));
+      }
+
+      // Hero typewriter
+      const tw = document.getElementById("typewriter");
+      const phrases = [
+        "Balancing the unbalanceable since day one.",
+        "Hunting ₹0.01 variances for sport.",
+        "Closing books faster than deadlines can form.",
+        "Making auditors weep tears of joy.",
+        "En route to Chartered. The mountain is scared.",
+      ];
+      if (tw && !prefersReduced) {
+        let pi = 0;
+        let ci = 0;
+        let deleting = false;
+        const tick = () => {
+          const phrase = phrases[pi];
+          ci += deleting ? -1 : 1;
+          tw.textContent = phrase.slice(0, ci);
+          let delay = deleting ? 24 : 52;
+          if (!deleting && ci === phrase.length) {
+            delay = 2200;
+            deleting = true;
+          } else if (deleting && ci === 0) {
+            deleting = false;
+            pi = (pi + 1) % phrases.length;
+            delay = 420;
+          }
+          setTimeout(tick, delay);
+        };
+        setTimeout(tick, 900);
+      }
+
+      // Live health pill in the footer
+      const healthText = document.getElementById("health-text");
+      const healthPill = document.getElementById("health-pill");
+      if (healthText) {
+        fetch("/health")
+          .then((r) => (r.ok ? r.text() : Promise.reject(new Error(String(r.status)))))
+          .then((t) => {
+            healthText.textContent = `/health → ${t.trim()} · ALL SYSTEMS BALANCED`;
+            healthPill?.classList.add("ok");
+          })
+          .catch(() => {
+            healthText.textContent = "/health → OFFLINE";
+          });
+      }
+    </script>
+  </body>
+</html>

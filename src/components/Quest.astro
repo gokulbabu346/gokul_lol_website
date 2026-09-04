@@ -1,0 +1,172 @@
+---
+const steps = [
+  {
+    status: "COMPLETE",
+    state: "done",
+    icon: "✔",
+    title: "Act I — The Foundation",
+    story:
+      "Conquered early. The syllabus never saw him coming, and the question papers have since requested a transfer.",
+  },
+  {
+    status: "IN PROGRESS",
+    state: "active",
+    icon: "⚔",
+    title: "Act II — The Professional Papers",
+    story:
+      "Being dismantled one group at a time. The remaining papers have reportedly started studying him back.",
+  },
+  {
+    status: "FORGING",
+    state: "active",
+    icon: "🔥",
+    title: "Act III — Practical Experience",
+    story:
+      "Real ledgers. Real stakes. The legend is being tempered daily, one voucher at a time.",
+  },
+  {
+    status: "LOCKED",
+    state: "locked",
+    icon: "🔒",
+    title: "Act IV — The Final Boss",
+    story:
+      "The last exams between Gokul and the title. They don't know what's coming. They never do.",
+  },
+];
+---
+
+<section class="section" id="quest">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">✦ The Quest ✦</p>
+      <h2>The road to “Chartered” — one ledger to rule them all.</h2>
+      <p class="blurb">
+        Every legend has a storyline. This one runs in four acts and ends with a title, a stamp, and
+        a lifetime supply of very tidy books.
+      </p>
+    </div>
+
+    <div class="progress reveal">
+      <div class="progress-top mono">
+        <span>CHARTERSHIP PROGRESS</span>
+        <span class="gold">62%*</span>
+      </div>
+      <div class="fill-bar"><i data-pct="62%"></i></div>
+      <p class="footnote mono">*Figure computed by a Chartered-in-Training. Margin of error: heroic.</p>
+    </div>
+
+    <ol class="timeline">
+      {
+        steps.map((s) => (
+          <li class={`step reveal ${s.state}`}>
+            <div class="marker mono" aria-hidden="true">
+              {s.icon}
+            </div>
+            <div class="body">
+              <p class="step-status mono">{s.status}</p>
+              <h3>{s.title}</h3>
+              <p class="story">{s.story}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .progress {
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--panel-strong), var(--panel));
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-bottom: 56px;
+  }
+  .progress-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .footnote {
+    color: var(--dim);
+    font-size: 11px;
+    margin-top: 12px;
+    letter-spacing: 0.04em;
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 19px;
+    top: 10px;
+    bottom: 30px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--green), var(--gold), var(--dim));
+    opacity: 0.35;
+  }
+  .step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 20px;
+    padding-bottom: 44px;
+  }
+  .marker {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    z-index: 1;
+  }
+  .step.done .marker {
+    color: var(--green);
+    border-color: rgba(61, 220, 151, 0.45);
+    box-shadow: 0 0 18px rgba(61, 220, 151, 0.15);
+  }
+  .step.active .marker {
+    color: var(--gold);
+    border-color: rgba(242, 182, 61, 0.5);
+    box-shadow: 0 0 18px rgba(242, 182, 61, 0.15);
+  }
+  .step.locked .marker {
+    color: var(--dim);
+  }
+  .step-status {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    margin-bottom: 6px;
+  }
+  .step.done .step-status {
+    color: var(--green);
+  }
+  .step.active .step-status {
+    color: var(--gold);
+  }
+  .step.locked .step-status {
+    color: var(--dim);
+  }
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+  .story {
+    color: var(--muted);
+    max-width: 560px;
+  }
+  .step.locked .body {
+    opacity: 0.75;
+  }
+</style>

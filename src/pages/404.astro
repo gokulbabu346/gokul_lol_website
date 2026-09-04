@@ -1,0 +1,46 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="404 — Entry Not Found | Gokul D_Bog">
+  <main class="nf">
+    <p class="code mono">404</p>
+    <h1>Entry Not Found.</h1>
+    <p class="lede">
+      This transaction could not be reconciled with reality. It has been flagged, reversed, and
+      gently escorted out of the books.
+    </p>
+    <a class="btn btn-primary" href="/">Back to Balanced Books</a>
+  </main>
+</Layout>
+
+<style>
+  .nf {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+  }
+  .code {
+    font-size: clamp(5rem, 18vw, 11rem);
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(100deg, #f7d98c, #f2b63d 50%, #c98d1e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 30px rgba(242, 182, 61, 0.25));
+  }
+  h1 {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    margin-top: 10px;
+  }
+  .lede {
+    max-width: 480px;
+    color: var(--muted);
+    margin: 18px 0 34px;
+  }
+</style>

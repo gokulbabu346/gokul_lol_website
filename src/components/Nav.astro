@@ -1,0 +1,75 @@
+<header class="nav">
+  <a class="brand mono" href="/">GOKUL<span class="accent">·</span>D_BOG</a>
+  <nav class="links">
+    <a href="#exploits">Exploits</a>
+    <a href="#quest">The Quest</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="nav-cta" href="#contact"><span class="dot"></span>Open to Quests</a>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 28px;
+    height: 64px;
+    background: rgba(6, 8, 12, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+  }
+  .brand .accent {
+    color: var(--gold);
+  }
+  .links {
+    display: flex;
+    gap: 26px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .links a {
+    transition: color 0.2s;
+    font-weight: 500;
+  }
+  .links a:hover {
+    color: var(--gold);
+  }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 16px;
+    color: var(--muted);
+    transition:
+      border-color 0.2s,
+      color 0.2s;
+  }
+  .nav-cta:hover {
+    border-color: rgba(61, 220, 151, 0.5);
+    color: var(--text);
+  }
+  @media (max-width: 780px) {
+    .links {
+      display: none;
+    }
+  }
+</style>
